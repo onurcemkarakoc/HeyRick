@@ -1,5 +1,8 @@
 package com.onurcemkarakoc.network
 
+import com.onurcemkarakoc.network.models.domain.Character
+import com.onurcemkarakoc.network.models.remote.RemoteCharacter
+import com.onurcemkarakoc.network.models.remote.toDomainCharacter
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.okhttp.OkHttp
@@ -10,7 +13,6 @@ import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 class KtorClient {
@@ -31,21 +33,6 @@ class KtorClient {
     }
 
     suspend fun getCharacter(id:Int): Character{
-        return client.get("character/$id").body<Character>()
+        return client.get("character/$id").body<RemoteCharacter>().toDomainCharacter()
     }
 }
-
-@Serializable
-data class Character(
-    val id: Int,
-    val name: String,
-    val origin: Origin,
-    val species: String,
-    val type: String
-)
-
-@Serializable
-data class Origin(
-    val name: String,
-    val url: String
-)

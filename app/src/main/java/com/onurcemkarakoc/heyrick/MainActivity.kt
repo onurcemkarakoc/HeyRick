@@ -17,8 +17,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.onurcemkarakoc.heyrick.ui.theme.HeyRickTheme
-import com.onurcemkarakoc.network.Character
 import com.onurcemkarakoc.network.KtorClient
+import com.onurcemkarakoc.network.models.domain.Character
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
@@ -43,7 +43,6 @@ class MainActivity : ComponentActivity() {
                     Column {
                         Greeting("Android")
                         Text(text = character?.name ?: "Empty Character")
-
                     }
                 }
             }
