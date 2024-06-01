@@ -2,32 +2,35 @@ package com.onurcemkarakoc.heyrick
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.onurcemkarakoc.heyrick.ui.theme.RickPrimary
 import com.onurcemkarakoc.network.models.domain.CharacterStatus
 
 @Composable
 fun CharacterStatusComponent(characterStatus: CharacterStatus) {
-    Column(
+    Row(
         modifier = Modifier
-            .width(IntrinsicSize.Min)
-            .background(color= Color.LightGray, shape = RoundedCornerShape(12.dp))
             .border(width = 2.dp, color = Color(characterStatus.color), shape = RoundedCornerShape(12.dp))
-            .padding(start = 16.dp, top = 16.dp, end = 48.dp, bottom = 8.dp)
+            .padding(8.dp),
+        verticalAlignment = Alignment.Bottom
     ) {
-        Text(text ="Status", fontSize = 14.sp)
-        Text(text = characterStatus.displayName, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+        Text(text ="Status: ", fontSize = 16.sp, color= RickPrimary)
+        Text(text = characterStatus.displayName, color= RickPrimary, fontSize = 16.sp, fontWeight = FontWeight.Bold)
     }
 }
 
