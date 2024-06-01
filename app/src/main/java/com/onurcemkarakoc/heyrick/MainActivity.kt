@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CharacterDetailsScreen(ktorClient = ktorClient, characterId = 1)
+                    CharacterDetailsScreen(ktorClient = ktorClient, characterId = 125)
                 }
             }
         }

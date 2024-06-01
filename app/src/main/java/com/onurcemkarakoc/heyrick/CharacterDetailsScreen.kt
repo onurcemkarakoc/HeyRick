@@ -1,13 +1,16 @@
 package com.onurcemkarakoc.heyrick
 
-import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,10 +20,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import coil.compose.SubcomposeAsyncImage
 import com.onurcemkarakoc.heyrick.ui.CharacterDetailsDataPoint
 import com.onurcemkarakoc.heyrick.ui.CharacterDetailsDataPointComponent
 import com.onurcemkarakoc.heyrick.ui.theme.MainBackground
+import com.onurcemkarakoc.heyrick.ui.theme.RickPrimary
 import com.onurcemkarakoc.network.KtorClient
 import com.onurcemkarakoc.network.models.domain.Character
 import com.onurcemkarakoc.network.models.domain.CharacterStatus
@@ -51,7 +57,7 @@ fun CharacterDetailsScreen(
     }
 
     LaunchedEffect(key1 = Unit) {
-        delay(2000)
+        delay(1000)
         character = ktorClient.getCharacter(characterId)
     }
 
@@ -71,12 +77,21 @@ fun CharacterDetailsScreen(
                 status = character?.status ?: CharacterStatus.Unknown
             )
         }
-        item { Spacer(modifier = Modifier.height(8.dp)) }
+        item { Spacer(modifier = Modifier.height(16.dp)) }
         item {
-            // image
+            SubcomposeAsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .clip(shape = RoundedCornerShape(12.dp)),
+                model = character?.imageUrl,
+                contentDescription = "Character image",
+                loading = { LoadingState() },
+            )
         }
+        item { Spacer(modifier = Modifier.height(16.dp)) }
         items(characterDataPoints) { dataPoint ->
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             CharacterDetailsDataPointComponent(dataPoint)
         }
     }
@@ -84,5 +99,10 @@ fun CharacterDetailsScreen(
 
 @Composable
 fun LoadingState() {
-    CircularProgressIndicator()
+    CircularProgressIndicator(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 128.dp),
+        color = RickPrimary
+    )
 }

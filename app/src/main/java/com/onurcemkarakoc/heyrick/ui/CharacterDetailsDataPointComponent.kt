@@ -17,7 +17,7 @@ data class CharacterDetailsDataPoint(
 @Composable
 fun CharacterDetailsDataPointComponent(dataPoint: CharacterDetailsDataPoint) {
     Column(Modifier.fillMaxWidth()) {
-        Text(text = dataPoint.title, fontSize = 16.sp, color = RickPrimary)
+        Text(text = dataPoint.title, fontSize = 12.sp, color = RickPrimary)
         Text(text = dataPoint.description, fontSize = 20.sp, color = RickSecondary)
     }
 }
