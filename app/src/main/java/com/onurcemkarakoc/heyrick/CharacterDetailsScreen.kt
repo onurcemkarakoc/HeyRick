@@ -40,6 +40,8 @@ fun CharacterDetailsScreen(
 
     var character by remember { mutableStateOf<Character?>(null) }
 
+    var error by remember { mutableStateOf<String?>(null) }
+
     val characterDataPoints by remember {
         derivedStateOf {
             buildList {
@@ -58,7 +60,9 @@ fun CharacterDetailsScreen(
 
     LaunchedEffect(key1 = Unit) {
         delay(1000)
-        character = ktorClient.getCharacter(characterId)
+        ktorClient.getCharacter(characterId)
+            .onSuccess { character = it }
+            .onError { error = it.message }
     }
 
     LazyColumn(
