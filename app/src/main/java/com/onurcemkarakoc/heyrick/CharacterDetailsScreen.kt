@@ -36,7 +36,6 @@ import com.onurcemkarakoc.heyrick.ui.theme.RickPrimary
 import com.onurcemkarakoc.network.KtorClient
 import com.onurcemkarakoc.network.models.domain.Character
 import com.onurcemkarakoc.network.models.domain.CharacterStatus
-import kotlinx.coroutines.delay
 
 @Composable
 fun CharacterDetailsScreen(
@@ -66,7 +65,6 @@ fun CharacterDetailsScreen(
     }
 
     LaunchedEffect(key1 = Unit) {
-        delay(1000)
         ktorClient.getCharacter(characterId)
             .onSuccess { character = it }
             .onError { error = it.message }

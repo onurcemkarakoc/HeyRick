@@ -32,9 +32,16 @@ class KtorClient {
         }
     }
 
+    private var characterCache: MutableMap<Int, Character> = mutableMapOf()
+
     suspend fun getCharacter(id: Int): ApiOperation<Character> {
+        characterCache[id]?.let {
+            return ApiOperation.Success(it)
+        }
         return safeApiCall {
-            client.get("character/$id").body<RemoteCharacter>().toDomainCharacter()
+            client.get("character/$id").body<RemoteCharacter>().toDomainCharacter().also {
+                characterCache[id] = it
+            }
         }
     }
 
