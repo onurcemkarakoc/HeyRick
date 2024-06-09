@@ -37,7 +37,20 @@ class KtorClient {
 
     private var characterCache: MutableMap<Int, Character> = mutableMapOf()
 
+    private suspend fun getEpisode(episodeId: Int): ApiOperation<Episode> {
+        return safeApiCall {
+            client.get("episode/$episodeId")
+                .body<RemoteEpisode>()
+                .toDomainEpisode()
+        }
+    }
+
     suspend fun getEpisodes(episodeIds: List<Int>): ApiOperation<List<Episode>> {
+        if (episodeIds.size == 1) {
+            return getEpisode(episodeIds.first()).onSuccess { listOf(it) }.map {
+                listOf(it)
+            }
+        }
         val ids = episodeIds.joinToString(",")
         return safeApiCall {
             client.get("episode/$ids")
@@ -69,6 +82,13 @@ class KtorClient {
 sealed interface ApiOperation<out T> {
     data class Success<T>(val data: T) : ApiOperation<T>
     data class Error<T>(val exception: Exception) : ApiOperation<T>
+
+    fun <R> map(block: (T) -> R): ApiOperation<R> {
+        return when (this) {
+            is Success -> Success(block(data))
+            is Error -> Error(exception)
+        }
+    }
 
     fun onSuccess(block: (T) -> Unit): ApiOperation<T> {
         if (this is Success) {
