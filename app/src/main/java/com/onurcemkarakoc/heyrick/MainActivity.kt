@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     NavHost(navController = navController, startDestination = "character_detail") {
                         composable("character_detail") {
-                            CharacterDetailsScreen(ktorClient = ktorClient, characterId = 125) {
+                            CharacterDetailsScreen(ktorClient = ktorClient, characterId = 1) {
                                 navController.navigate("character_episodes/$it")
                             }
                         }
@@ -40,7 +40,10 @@ class MainActivity : ComponentActivity() {
                             route ="character_episodes/{characterId}",
                             arguments = listOf(navArgument("characterId") { type = NavType.IntType })
                         ){ backStackEntry ->
-                            CharacterEpisodeScreen(characterId = backStackEntry.arguments?.getInt("characterId") ?: 0)
+                            CharacterEpisodeScreen(
+                                ktorClient,
+                                characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
+                            )
                         }
                     }
 

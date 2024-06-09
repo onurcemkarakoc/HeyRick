@@ -1,8 +1,11 @@
 package com.onurcemkarakoc.network
 
 import com.onurcemkarakoc.network.models.domain.Character
+import com.onurcemkarakoc.network.models.domain.Episode
 import com.onurcemkarakoc.network.models.remote.RemoteCharacter
+import com.onurcemkarakoc.network.models.remote.RemoteEpisode
 import com.onurcemkarakoc.network.models.remote.toDomainCharacter
+import com.onurcemkarakoc.network.models.remote.toDomainEpisode
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.okhttp.OkHttp
@@ -33,6 +36,15 @@ class KtorClient {
     }
 
     private var characterCache: MutableMap<Int, Character> = mutableMapOf()
+
+    suspend fun getEpisodes(episodeIds: List<Int>): ApiOperation<List<Episode>> {
+        val ids = episodeIds.joinToString(",")
+        return safeApiCall {
+            client.get("episode/$ids")
+                .body<List<RemoteEpisode>>()
+                .map { it.toDomainEpisode() }
+        }
+    }
 
     suspend fun getCharacter(id: Int): ApiOperation<Character> {
         characterCache[id]?.let {
