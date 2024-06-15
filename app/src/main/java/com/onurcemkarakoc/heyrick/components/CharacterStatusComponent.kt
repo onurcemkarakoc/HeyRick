@@ -1,13 +1,8 @@
-package com.onurcemkarakoc.heyrick
+package com.onurcemkarakoc.heyrick.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +20,11 @@ import com.onurcemkarakoc.network.models.domain.CharacterStatus
 fun CharacterStatusComponent(characterStatus: CharacterStatus) {
     Row(
         modifier = Modifier
-            .border(width = 2.dp, color = Color(characterStatus.color), shape = RoundedCornerShape(12.dp))
+            .border(
+                width = 2.dp,
+                color = Color(characterStatus.color),
+                shape = RoundedCornerShape(12.dp)
+            )
             .padding(8.dp),
         verticalAlignment = Alignment.Bottom
     ) {

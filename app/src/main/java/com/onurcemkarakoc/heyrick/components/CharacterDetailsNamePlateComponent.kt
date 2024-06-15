@@ -1,4 +1,4 @@
-package com.onurcemkarakoc.heyrick
+package com.onurcemkarakoc.heyrick.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

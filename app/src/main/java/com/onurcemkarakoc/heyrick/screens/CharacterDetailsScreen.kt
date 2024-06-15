@@ -1,4 +1,4 @@
-package com.onurcemkarakoc.heyrick
+package com.onurcemkarakoc.heyrick.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,8 +29,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
-import com.onurcemkarakoc.heyrick.ui.CharacterDetailsDataPoint
-import com.onurcemkarakoc.heyrick.ui.CharacterDetailsDataPointComponent
+import com.onurcemkarakoc.heyrick.components.CharacterDetailsDataPoint
+import com.onurcemkarakoc.heyrick.components.CharacterDetailsDataPointComponent
+import com.onurcemkarakoc.heyrick.components.CharacterDetailsNamePlateComponent
 import com.onurcemkarakoc.heyrick.ui.theme.MainBackground
 import com.onurcemkarakoc.heyrick.ui.theme.RickPrimary
 import com.onurcemkarakoc.network.KtorClient

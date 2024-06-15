@@ -1,4 +1,4 @@
-package com.onurcemkarakoc.heyrick.ui
+package com.onurcemkarakoc.heyrick.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
