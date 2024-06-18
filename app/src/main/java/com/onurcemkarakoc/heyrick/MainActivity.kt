@@ -12,8 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.onurcemkarakoc.heyrick.screens.CharacterDetailsScreen
-import com.onurcemkarakoc.heyrick.screens.CharacterEpisodeScreen
+import com.onurcemkarakoc.heyrick.screens.details.CharacterDetailsScreen
+import com.onurcemkarakoc.heyrick.screens.episode.CharacterEpisodeScreen
 import com.onurcemkarakoc.heyrick.ui.theme.HeyRickTheme
 import com.onurcemkarakoc.network.KtorClient
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     NavHost(navController = navController, startDestination = "character_detail") {
                         composable("character_detail") {
-                            CharacterDetailsScreen(ktorClient = ktorClient, characterId = 1) {
+                            CharacterDetailsScreen(characterId = 1) {
                                 navController.navigate("character_episodes/$it")
                             }
                         }
@@ -47,7 +47,6 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(navArgument("characterId") { type = NavType.IntType })
                         ){ backStackEntry ->
                             CharacterEpisodeScreen(
-                                ktorClient,
                                 characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
                             )
                         }
