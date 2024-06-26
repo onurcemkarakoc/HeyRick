@@ -12,9 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.onurcemkarakoc.heyrick.screens.details.CharacterDetailsScreen
-import com.onurcemkarakoc.heyrick.screens.episode.CharacterEpisodeScreen
-import com.onurcemkarakoc.heyrick.ui.theme.HeyRickTheme
+import com.onurcemkarakoc.core.common.ui.theme.HeyRickTheme
+import com.onurcemkarakoc.feature.details.CharacterDetailsScreen
+import com.onurcemkarakoc.feature.episode.CharacterEpisodeScreen
 import com.onurcemkarakoc.network.KtorClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -43,9 +43,11 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         composable(
-                            route ="character_episodes/{characterId}",
-                            arguments = listOf(navArgument("characterId") { type = NavType.IntType })
-                        ){ backStackEntry ->
+                            route = "character_episodes/{characterId}",
+                            arguments = listOf(navArgument("characterId") {
+                                type = NavType.IntType
+                            })
+                        ) { backStackEntry ->
                             CharacterEpisodeScreen(
                                 characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
                             )

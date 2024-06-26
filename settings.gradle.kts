@@ -22,3 +22,8 @@ dependencyResolutionManagement {
 rootProject.name = "HeyRick"
 include(":app")
 include(":network")
+include(":feature:details")
+include(":feature:episode")
+include(":core:common")
+include(":network:models:domain")
+include(":core:data")
