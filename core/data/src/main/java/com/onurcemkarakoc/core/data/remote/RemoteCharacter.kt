@@ -1,8 +1,10 @@
-package com.onurcemkarakoc.network.models.remote
+package com.onurcemkarakoc.core.data.remote
 
 
+import com.onurcemkarakoc.core.data.domain.Character
+import com.onurcemkarakoc.core.data.domain.CharacterGender
+import com.onurcemkarakoc.core.data.domain.CharacterStatus
 import kotlinx.serialization.Serializable
-import com.onurcemkarakoc.network.models.domain.*
 
 @Serializable
 data class RemoteCharacter(

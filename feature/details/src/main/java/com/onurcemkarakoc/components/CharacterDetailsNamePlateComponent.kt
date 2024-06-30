@@ -11,10 +11,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
-import com.onurcemkarakoc.network.models.domain.CharacterStatus
 
 @Composable
-fun CharacterDetailsNamePlateComponent(name: String, status: CharacterStatus) {
+fun CharacterDetailsNamePlateComponent(
+    name: String,
+    status: com.onurcemkarakoc.core.data.domain.CharacterStatus
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         CharacterStatusComponent(status)
         Spacer(modifier = Modifier.height(8.dp))
@@ -25,5 +27,8 @@ fun CharacterDetailsNamePlateComponent(name: String, status: CharacterStatus) {
 @Preview
 @Composable
 fun CharacterDetailsNamePlateComponentPreview() {
-    CharacterDetailsNamePlateComponent("Rick", CharacterStatus.Alive)
+    CharacterDetailsNamePlateComponent(
+        "Rick",
+        com.onurcemkarakoc.core.data.domain.CharacterStatus.Alive
+    )
 }

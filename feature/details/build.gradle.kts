@@ -42,7 +42,7 @@ android {
 dependencies {
 
     implementation(project(":core:common"))
-    implementation(project(":network"))
+    implementation(project(":core:data"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)

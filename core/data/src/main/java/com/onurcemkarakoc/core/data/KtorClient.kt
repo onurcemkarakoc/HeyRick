@@ -1,11 +1,11 @@
-package com.onurcemkarakoc.network
+package com.onurcemkarakoc.core.data
 
-import com.onurcemkarakoc.network.models.domain.Character
-import com.onurcemkarakoc.network.models.domain.Episode
-import com.onurcemkarakoc.network.models.remote.RemoteCharacter
-import com.onurcemkarakoc.network.models.remote.RemoteEpisode
-import com.onurcemkarakoc.network.models.remote.toDomainCharacter
-import com.onurcemkarakoc.network.models.remote.toDomainEpisode
+import com.onurcemkarakoc.core.data.domain.Character
+import com.onurcemkarakoc.core.data.domain.Episode
+import com.onurcemkarakoc.core.data.remote.RemoteCharacter
+import com.onurcemkarakoc.core.data.remote.RemoteEpisode
+import com.onurcemkarakoc.core.data.remote.toDomainCharacter
+import com.onurcemkarakoc.core.data.remote.toDomainEpisode
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.okhttp.OkHttp

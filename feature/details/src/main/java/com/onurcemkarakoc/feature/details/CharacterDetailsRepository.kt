@@ -1,8 +1,8 @@
 package com.onurcemkarakoc.feature.details
 
-import com.onurcemkarakoc.network.ApiOperation
-import com.onurcemkarakoc.network.KtorClient
-import com.onurcemkarakoc.network.models.domain.Character
+import com.onurcemkarakoc.core.data.ApiOperation
+import com.onurcemkarakoc.core.data.KtorClient
+import com.onurcemkarakoc.core.data.domain.Character
 import javax.inject.Inject
 
 class CharacterDetailsRepository @Inject constructor(private val ktorClient: KtorClient) {

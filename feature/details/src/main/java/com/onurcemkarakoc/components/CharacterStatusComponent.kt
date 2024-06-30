@@ -13,10 +13,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.onurcemkarakoc.network.models.domain.CharacterStatus
 
 @Composable
-fun CharacterStatusComponent(characterStatus: CharacterStatus) {
+fun CharacterStatusComponent(characterStatus: com.onurcemkarakoc.core.data.domain.CharacterStatus) {
     Row(
         modifier = Modifier
             .border(
@@ -44,17 +43,17 @@ fun CharacterStatusComponent(characterStatus: CharacterStatus) {
 @Preview
 @Composable
 fun CharacterStatusComponentPreviewAlive() {
-    CharacterStatusComponent(CharacterStatus.Alive)
+    CharacterStatusComponent(com.onurcemkarakoc.core.data.domain.CharacterStatus.Alive)
 }
 
 @Preview
 @Composable
 fun CharacterStatusComponentPreviewDead() {
-    CharacterStatusComponent(CharacterStatus.Dead)
+    CharacterStatusComponent(com.onurcemkarakoc.core.data.domain.CharacterStatus.Dead)
 }
 
 @Preview
 @Composable
 fun CharacterStatusComponentPreviewUnknown() {
-    CharacterStatusComponent(CharacterStatus.Unknown)
+    CharacterStatusComponent(com.onurcemkarakoc.core.data.domain.CharacterStatus.Unknown)
 }

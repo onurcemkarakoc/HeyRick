@@ -1,4 +1,4 @@
-package com.onurcemkarakoc.network.models.domain
+package com.onurcemkarakoc.core.data.domain
 
 import android.graphics.Color
 import kotlinx.serialization.Serializable

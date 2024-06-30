@@ -53,10 +53,10 @@ android {
 
 dependencies {
 
-    implementation(project(":network"))
     implementation(project(":feature:details"))
     implementation(project(":feature:episode"))
     implementation(project(":core:common"))
+    implementation(project(":core:data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

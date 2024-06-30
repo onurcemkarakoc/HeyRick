@@ -15,10 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.onurcemkarakoc.core.common.components.CharacterDetailsDataPoint
 import com.onurcemkarakoc.core.common.components.CharacterDetailsDataPointComponent
-import com.onurcemkarakoc.network.models.domain.Episode
 
 @Composable
-fun EpisodeRowComponent(episode: Episode) {
+fun EpisodeRowComponent(episode: com.onurcemkarakoc.core.data.domain.Episode) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         CharacterDetailsDataPointComponent(
             dataPoint = CharacterDetailsDataPoint(
@@ -50,7 +49,7 @@ fun EpisodeRowComponent(episode: Episode) {
 @Composable
 fun EpisodeRowComponentPreview() {
     EpisodeRowComponent(
-        episode = Episode(
+        episode = com.onurcemkarakoc.core.data.domain.Episode(
             id = 1,
             name = "Pilot",
             airDate = "December 2, 2013",

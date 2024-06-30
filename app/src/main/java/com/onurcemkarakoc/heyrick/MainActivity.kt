@@ -13,9 +13,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.onurcemkarakoc.core.common.ui.theme.HeyRickTheme
+import com.onurcemkarakoc.core.data.KtorClient
 import com.onurcemkarakoc.feature.details.CharacterDetailsScreen
 import com.onurcemkarakoc.feature.episode.CharacterEpisodeScreen
-import com.onurcemkarakoc.network.KtorClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
