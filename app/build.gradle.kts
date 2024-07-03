@@ -53,6 +53,7 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:list"))
     implementation(project(":feature:details"))
     implementation(project(":feature:episode"))
     implementation(project(":core:common"))

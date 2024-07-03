@@ -16,6 +16,7 @@ import com.onurcemkarakoc.core.common.ui.theme.HeyRickTheme
 import com.onurcemkarakoc.core.data.KtorClient
 import com.onurcemkarakoc.feature.details.CharacterDetailsScreen
 import com.onurcemkarakoc.feature.episode.CharacterEpisodeScreen
+import com.onurcemkarakoc.feature.list.CharacterListScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -36,9 +37,23 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavHost(navController = navController, startDestination = "character_detail") {
-                        composable("character_detail") {
-                            CharacterDetailsScreen(characterId = 1) {
+                    NavHost(navController = navController, startDestination = "character_list") {
+
+                        composable("character_list") {
+                            CharacterListScreen {
+                                navController.navigate("character_detail/$it")
+                            }
+                        }
+
+                        composable(
+                            route = "character_detail/{characterId}",
+                            arguments = listOf(navArgument("characterId") {
+                                type = NavType.IntType
+                            })
+                        ) { backStackEntry ->
+                            CharacterDetailsScreen(
+                                characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
+                            ) {
                                 navController.navigate("character_episodes/$it")
                             }
                         }

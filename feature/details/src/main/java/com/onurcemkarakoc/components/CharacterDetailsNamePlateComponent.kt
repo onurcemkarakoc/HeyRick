@@ -7,20 +7,29 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
+import com.onurcemkarakoc.core.data.domain.CharacterStatus
 
 @Composable
 fun CharacterDetailsNamePlateComponent(
     name: String,
-    status: com.onurcemkarakoc.core.data.domain.CharacterStatus
+    status: CharacterStatus
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        CharacterStatusComponent(status)
+        CharacterStatusComponent(characterStatus = status)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = name, fontSize = 40.sp, color = RickPrimary)
+        Text(
+            text = name,
+            fontSize = 40.sp,
+            color = RickPrimary,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            lineHeight = 40.sp
+        )
     }
 }
 
@@ -28,7 +37,7 @@ fun CharacterDetailsNamePlateComponent(
 @Composable
 fun CharacterDetailsNamePlateComponentPreview() {
     CharacterDetailsNamePlateComponent(
-        "Rick",
-        com.onurcemkarakoc.core.data.domain.CharacterStatus.Alive
+        "Abadango Cluster Princess",
+        CharacterStatus.Alive
     )
 }

@@ -4,7 +4,9 @@ import com.onurcemkarakoc.core.data.domain.Character
 import com.onurcemkarakoc.core.data.domain.Episode
 import com.onurcemkarakoc.core.data.remote.RemoteCharacter
 import com.onurcemkarakoc.core.data.remote.RemoteEpisode
+import com.onurcemkarakoc.core.data.remote.RemoteListResponse
 import com.onurcemkarakoc.core.data.remote.toDomainCharacter
+import com.onurcemkarakoc.core.data.remote.toDomainCharacterList
 import com.onurcemkarakoc.core.data.remote.toDomainEpisode
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -67,6 +69,12 @@ class KtorClient {
             client.get("character/$id").body<RemoteCharacter>().toDomainCharacter().also {
                 characterCache[id] = it
             }
+        }
+    }
+
+    suspend fun getCharacterList(page: Int = 1): ApiOperation<List<Character>> {
+        return safeApiCall {
+            client.get("character/?page=$page").body<RemoteListResponse>().toDomainCharacterList()
         }
     }
 

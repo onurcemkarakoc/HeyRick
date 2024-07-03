@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.onurcemkarakoc.core.common"
+    namespace = "com.onurcemkarakoc.feature.list"
     compileSdk = 34
 
     defaultConfig {
@@ -39,6 +40,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
+    implementation(project(":core:data"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -52,4 +56,11 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.constraint.layout)
+
+    implementation(libs.coil.compose)
+    implementation(libs.navigation.compose)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
 }
