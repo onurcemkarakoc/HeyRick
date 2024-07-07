@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="status">"Status: "</string>
+    <string name="character_details">Character Details</string>
+    <string name="view_all_episodes">View All Episodes</string>
+</resources>

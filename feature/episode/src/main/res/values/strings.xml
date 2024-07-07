@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cahracter_episodes">Character Episode</string>
+    <string name="s_episodes">%s\'s Episodes</string>
+    <string name="season">Season %s</string>
+    <string name="ep">%s ep</string>
+    <string name="episode">Episode</string>
+</resources>

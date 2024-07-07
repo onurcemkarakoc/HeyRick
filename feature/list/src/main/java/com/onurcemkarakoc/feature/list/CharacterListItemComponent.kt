@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,7 +51,7 @@ fun CharacterListItemComponent(character: Character, onDetailClick: (Int) -> Uni
                     .clip(shape = RoundedCornerShape(12.dp)),
                 contentScale = ContentScale.Crop,
                 model = character.imageUrl,
-                contentDescription = "Character image",
+                contentDescription = stringResource(id = com.onurcemkarakoc.core.common.R.string.character_image),
                 loading = { LoadingState() },
             )
 

@@ -8,6 +8,6 @@ data class RemoteListResponse(val info: RemoteInfo, val results: List<RemoteChar
 
 // mapper
 
-fun RemoteListResponse.toDomainCharacterList(): List<Character> {
-    return results.map { it.toDomainCharacter() }
+fun RemoteListResponse.toDomainCharacterListPair(): Pair<Boolean, List<Character>> {
+    return Pair(info.next?.isBlank() == false, results.map { it.toDomainCharacter() })
 }

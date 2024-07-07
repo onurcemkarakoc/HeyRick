@@ -6,7 +6,7 @@ import com.onurcemkarakoc.core.data.domain.Character
 import javax.inject.Inject
 
 class CharacterListRepository @Inject constructor(private val ktorClient: KtorClient) {
-    suspend fun fetchCharacterList(page: Int): ApiOperation<List<Character>> {
+    suspend fun fetchCharacterList(page: Int): ApiOperation<Pair<Boolean, List<Character>>> {
         return ktorClient.getCharacterList(page)
     }
 }

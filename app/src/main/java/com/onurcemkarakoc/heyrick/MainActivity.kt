@@ -52,7 +52,10 @@ class MainActivity : ComponentActivity() {
                             })
                         ) { backStackEntry ->
                             CharacterDetailsScreen(
-                                characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
+                                characterId = backStackEntry.arguments?.getInt("characterId") ?: 0,
+                                onBackPressedClick = {
+                                    navController.navigateUp()
+                                }
                             ) {
                                 navController.navigate("character_episodes/$it")
                             }
@@ -64,7 +67,10 @@ class MainActivity : ComponentActivity() {
                             })
                         ) { backStackEntry ->
                             CharacterEpisodeScreen(
-                                characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
+                                characterId = backStackEntry.arguments?.getInt("characterId") ?: 0,
+                                onBackPressedClick = {
+                                    navController.navigateUp()
+                                }
                             )
                         }
                     }

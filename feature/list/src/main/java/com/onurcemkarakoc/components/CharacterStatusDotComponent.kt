@@ -22,9 +22,7 @@ fun CharacterStatusDotComponent(characterStatus: CharacterStatus, modifier: Modi
             .width(12.dp)
             .height(12.dp)
             .background(Color(characterStatus.color))
-    ) {
-    }
-
+    )
 }
 
 @Preview
