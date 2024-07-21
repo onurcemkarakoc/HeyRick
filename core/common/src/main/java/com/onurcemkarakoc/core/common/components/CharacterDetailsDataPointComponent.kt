@@ -1,12 +1,11 @@
 package com.onurcemkarakoc.core.common.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
-import com.onurcemkarakoc.core.common.ui.theme.RickSecondary
 
 data class CharacterDetailsDataPoint(
     val title: String,
@@ -15,8 +14,12 @@ data class CharacterDetailsDataPoint(
 @Composable
 fun CharacterDetailsDataPointComponent(dataPoint: CharacterDetailsDataPoint) {
     Column {
-        Text(text = dataPoint.title, fontSize = 12.sp, color = RickPrimary)
-        Text(text = dataPoint.description, fontSize = 20.sp, color = RickSecondary)
+        Text(text = dataPoint.title, fontSize = 12.sp, color = MaterialTheme.colorScheme.secondary)
+        Text(
+            text = dataPoint.description,
+            fontSize = 20.sp,
+            color = MaterialTheme.colorScheme.tertiary
+        )
     }
 }
 

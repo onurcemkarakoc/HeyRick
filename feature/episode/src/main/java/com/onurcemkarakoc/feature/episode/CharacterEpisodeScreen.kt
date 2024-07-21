@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,8 +36,6 @@ import com.onurcemkarakoc.core.common.components.CharacterDetailsDataPoint
 import com.onurcemkarakoc.core.common.components.CharacterDetailsDataPointComponent
 import com.onurcemkarakoc.core.common.components.LoadingState
 import com.onurcemkarakoc.core.common.components.SimpleToolbar
-import com.onurcemkarakoc.core.common.ui.theme.MainBackground
-import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -55,7 +54,7 @@ fun CharacterEpisodeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MainBackground)
+            .background(MaterialTheme.colorScheme.primary)
     ) {
         val viewState = state.value
         val title = when (viewState) {
@@ -64,7 +63,7 @@ fun CharacterEpisodeScreen(
                 viewState.character.name
             )
 
-            else -> stringResource(id = R.string.cahracter_episodes)
+            else -> stringResource(id = R.string.character_episodes)
         }
 
         SimpleToolbar(title = title) {
@@ -74,14 +73,14 @@ fun CharacterEpisodeScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MainBackground),
+                .background(MaterialTheme.colorScheme.primary),
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
             when (viewState) {
                 is CharacterEpisodeViewState.Error -> item {
                     Text(
                         text = viewState.message,
-                        color = RickPrimary
+                        color = MaterialTheme.colorScheme.secondary
                     )
                 }
 
@@ -153,20 +152,20 @@ fun SeasonHeader(seasonNumber: Int) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(MainBackground)
+            .background(MaterialTheme.colorScheme.primary)
             .padding(top = 8.dp, bottom = 16.dp)
     ) {
         Text(
             text = stringResource(R.string.season, seasonNumber),
             fontSize = 32.sp,
             lineHeight = 32.sp,
-            color = RickPrimary,
+            color = MaterialTheme.colorScheme.secondary,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .border(
                     1.dp,
-                    RickPrimary, RoundedCornerShape(12.dp)
+                    MaterialTheme.colorScheme.secondary, RoundedCornerShape(12.dp)
                 )
                 .padding(8.dp)
         )

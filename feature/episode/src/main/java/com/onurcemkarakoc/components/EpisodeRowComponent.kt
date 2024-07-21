@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.onurcemkarakoc.core.common.components.CharacterDetailsDataPoint
 import com.onurcemkarakoc.core.common.components.CharacterDetailsDataPointComponent
-import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
 import com.onurcemkarakoc.feature.episode.R
 
 @Composable
@@ -33,14 +33,14 @@ fun EpisodeRowComponent(episode: com.onurcemkarakoc.core.data.domain.Episode) {
             Text(
                 text = episode.name,
                 fontSize = 24.sp,
-                color = RickPrimary,
+                color = MaterialTheme.colorScheme.secondary,
                 textAlign = TextAlign.End,
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
                 text = episode.airDate,
                 fontSize = 16.sp,
-                color = RickPrimary,
+                color = MaterialTheme.colorScheme.secondary,
                 textAlign = TextAlign.End,
                 modifier = Modifier.fillMaxWidth()
             )

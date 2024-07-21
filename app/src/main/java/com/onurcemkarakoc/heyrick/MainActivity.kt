@@ -3,14 +3,12 @@ package com.onurcemkarakoc.heyrick
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -20,7 +18,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -33,23 +30,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.onurcemkarakoc.core.common.ui.theme.HeyRickTheme
-import com.onurcemkarakoc.core.common.ui.theme.MainBackground
-import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
-import com.onurcemkarakoc.core.common.ui.theme.RickPrimary50
-import com.onurcemkarakoc.core.data.KtorClient
 import com.onurcemkarakoc.feature.details.CharacterDetailsScreen
 import com.onurcemkarakoc.feature.episode.CharacterEpisodeScreen
 import com.onurcemkarakoc.feature.list.CharacterListScreen
+import com.onurcemkarakoc.feature.settings.SettingsScreen
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var ktorClient: KtorClient
-
-    val items = listOf(Screen.CharacterList, Screen.Settings)
+    private val items = listOf(Screen.CharacterList, Screen.Settings)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +53,8 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     bottomBar = {
                         NavigationBar(
-                            containerColor = MainBackground, windowInsets = WindowInsets(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            windowInsets = WindowInsets(
                                 0, 0, 0, 0
                             )
                         ) {
@@ -88,24 +79,18 @@ class MainActivity : ComponentActivity() {
                                     onClick = {
                                         selectedIndex = index
                                         navController.navigate(screen.route) {
-                                            // Pop up to the start destination of the graph to
-                                            // avoid building up a large stack of destinations
-                                            // on the back stack as users select items
                                             popUpTo(navController.graph.findStartDestination().id) {
                                                 saveState = true
                                             }
-                                            // Avoid multiple copies of the same destination when
-                                            // reselecting the same item
                                             launchSingleTop = true
-                                            // Restore state when reselecting a previously selected item
                                             restoreState = true
                                         }
                                     },
                                     colors = NavigationBarItemDefaults.colors(
-                                        selectedIconColor = RickPrimary,
-                                        selectedTextColor = RickPrimary,
-                                        unselectedIconColor = RickPrimary50,
-                                        unselectedTextColor = RickPrimary50,
+                                        selectedIconColor = MaterialTheme.colorScheme.secondary,
+                                        selectedTextColor = MaterialTheme.colorScheme.secondary,
+                                        unselectedIconColor = MaterialTheme.colorScheme.tertiary,
+                                        unselectedTextColor = MaterialTheme.colorScheme.tertiary,
                                         indicatorColor = Color.Transparent,
 
                                         )
@@ -155,16 +140,7 @@ class MainActivity : ComponentActivity() {
                                 })
                         }
                         composable(route = Screen.Settings.route) {
-                            Column(
-                                Modifier
-                                    .fillMaxSize()
-                                    .background(MainBackground),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-
-                                Text("Settings", color = RickPrimary)
-                            }
+                            SettingsScreen()
                         }
                     }
                 }

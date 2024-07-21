@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,16 +23,14 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.SubcomposeAsyncImage
 import com.onurcemkarakoc.components.CharacterStatusDotComponent
 import com.onurcemkarakoc.core.common.components.LoadingState
-import com.onurcemkarakoc.core.common.ui.theme.MainBackground
-import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
 import com.onurcemkarakoc.core.data.domain.Character
 
 @Composable
 fun CharacterListItemComponent(character: Character, onDetailClick: (Int) -> Unit) {
     Column(
         Modifier
-            .background(MainBackground)
-            .border(1.dp, RickPrimary, shape = RoundedCornerShape(8.dp))
+            .background(MaterialTheme.colorScheme.primary)
+            .border(1.dp, MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(8.dp))
             .clickable {
                 onDetailClick(character.id)
             }
@@ -70,7 +69,7 @@ fun CharacterListItemComponent(character: Character, onDetailClick: (Int) -> Uni
             Text(
                 text = character.name,
                 fontSize = 24.sp,
-                color = RickPrimary,
+                color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier
                     .fillMaxWidth()
                     .constrainAs(text) {

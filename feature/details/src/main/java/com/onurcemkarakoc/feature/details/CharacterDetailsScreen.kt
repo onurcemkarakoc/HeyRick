@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,9 +32,6 @@ import com.onurcemkarakoc.components.CharacterStatusComponent
 import com.onurcemkarakoc.core.common.components.CharacterDetailsDataPointComponent
 import com.onurcemkarakoc.core.common.components.LoadingState
 import com.onurcemkarakoc.core.common.components.SimpleToolbar
-import com.onurcemkarakoc.core.common.ui.theme.MainBackground
-import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
-
 
 @Composable
 fun CharacterDetailsScreen(
@@ -51,7 +49,7 @@ fun CharacterDetailsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MainBackground)
+            .background(MaterialTheme.colorScheme.primary)
     ) {
         val viewState = state.value
         val title = when (viewState) {
@@ -65,7 +63,7 @@ fun CharacterDetailsScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MainBackground),
+                .background(MaterialTheme.colorScheme.primary),
             contentPadding = PaddingValues(horizontal = 8.dp)
         ) {
 
@@ -73,7 +71,7 @@ fun CharacterDetailsScreen(
                 is CharacterDetailsViewState.Error -> item {
                     Text(
                         text = viewState.message,
-                        color = RickPrimary
+                        color = MaterialTheme.colorScheme.secondary
                     )
                 }
 
@@ -112,12 +110,16 @@ fun CharacterDetailsScreen(
                                 modifier = Modifier
                                     .fillMaxWidth(.9f)
                                     .clip(RoundedCornerShape(12.dp))
-                                    .border(1.dp, RickPrimary, RoundedCornerShape(12.dp))
+                                    .border(
+                                        1.dp,
+                                        MaterialTheme.colorScheme.secondary,
+                                        RoundedCornerShape(12.dp)
+                                    )
                                     .clickable {
                                         onEpisodeClick(characterId)
                                     }
                                     .padding(8.dp),
-                                color = RickPrimary,
+                                color = MaterialTheme.colorScheme.secondary,
                                 textAlign = TextAlign.Center,
                             )
                         }

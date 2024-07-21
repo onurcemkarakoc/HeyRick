@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,8 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.onurcemkarakoc.core.common.components.LoadingState
 import com.onurcemkarakoc.core.common.components.SimpleToolbar
-import com.onurcemkarakoc.core.common.ui.theme.MainBackground
-import com.onurcemkarakoc.core.common.ui.theme.RickPrimary
 
 @Composable
 fun CharacterListScreen(
@@ -51,7 +50,7 @@ fun CharacterListScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MainBackground)
+            .background(MaterialTheme.colorScheme.primary)
     ) {
         SimpleToolbar(title = stringResource(R.string.rick_and_morty_characters))
         Spacer(modifier = Modifier.height(16.dp))
@@ -66,7 +65,7 @@ fun CharacterListScreen(
                 is CharacterListViewState.Error -> item {
                     Text(
                         text = viewState.message,
-                        color = RickPrimary
+                        color = MaterialTheme.colorScheme.secondary
                     )
                 }
 
