@@ -1,6 +1,7 @@
 package com.onurcemkarakoc.feature.list
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -30,6 +31,7 @@ fun CharacterListItemComponent(character: Character, onDetailClick: (Int) -> Uni
     Column(
         Modifier
             .background(MainBackground)
+            .border(1.dp, RickPrimary, shape = RoundedCornerShape(8.dp))
             .clickable {
                 onDetailClick(character.id)
             }
@@ -48,7 +50,7 @@ fun CharacterListItemComponent(character: Character, onDetailClick: (Int) -> Uni
                         bottom.linkTo(text.top)
                     }
                     .aspectRatio(.75f)
-                    .clip(shape = RoundedCornerShape(12.dp)),
+                    .clip(shape = RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop,
                 model = character.imageUrl,
                 contentDescription = stringResource(id = com.onurcemkarakoc.core.common.R.string.character_image),

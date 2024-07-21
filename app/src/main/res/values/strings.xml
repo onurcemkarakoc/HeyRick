@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HeyRick</string>
+    <string name="settings">Settings</string>
+    <string name="character_list">Character List</string>
+    <string name="character_details">Character Details</string>
+    <string name="character_episode">Character Episode</string>
 </resources>
