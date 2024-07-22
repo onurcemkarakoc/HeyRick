@@ -3,7 +3,6 @@ package com.onurcemkarakoc.heyrick
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,12 +23,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.onurcemkarakoc.core.common.ui.theme.HeyRickTheme
+import com.onurcemkarakoc.core.common.utils.currentRoute
 import com.onurcemkarakoc.feature.details.CharacterDetailsScreen
 import com.onurcemkarakoc.feature.episode.CharacterEpisodeScreen
 import com.onurcemkarakoc.feature.list.CharacterListScreen
@@ -40,62 +41,64 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val items = listOf(Screen.CharacterList, Screen.Settings)
+    private val nonShowedBottomBarScreens = listOf(Screen.CharacterDetails, Screen.CharacterEpisode)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
+
+            val navController: NavHostController = rememberNavController()
             var selectedIndex by remember {
                 mutableIntStateOf(0)
             }
-
             HeyRickTheme {
                 Scaffold(
                     bottomBar = {
-                        NavigationBar(
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            windowInsets = WindowInsets(
-                                0, 0, 0, 0
-                            )
-                        ) {
-                            items.forEachIndexed { index, screen ->
-                                NavigationBarItem(
-                                    icon = {
-                                        Icon(
-                                            screen.icon,
-                                            modifier = Modifier
-                                                .size(24.dp),
-                                            contentDescription = null,
-                                        )
-                                    },
-                                    label = {
-                                        Text(
-                                            stringResource(screen.resourceId),
-                                            fontSize = 16.sp,
-                                            lineHeight = 16.sp,
-                                        )
-                                    },
-                                    selected = index == selectedIndex,
-                                    onClick = {
-                                        selectedIndex = index
-                                        navController.navigate(screen.route) {
-                                            popUpTo(navController.graph.findStartDestination().id) {
-                                                saveState = true
+                        val currentRoute = currentRoute(navController)
+                        val hasBottomBar = nonShowedBottomBarScreens.map { it.route }
+                            .none { currentRoute?.contains(it) == true }
+                        if (hasBottomBar) {
+                            NavigationBar(
+                                containerColor = MaterialTheme.colorScheme.primary,
+                            ) {
+                                items.forEachIndexed { index, screen ->
+                                    NavigationBarItem(
+                                        icon = {
+                                            Icon(
+                                                screen.icon,
+                                                modifier = Modifier
+                                                    .size(24.dp),
+                                                contentDescription = null,
+                                            )
+                                        },
+                                        label = {
+                                            Text(
+                                                stringResource(screen.resourceId),
+                                                fontSize = 16.sp,
+                                                lineHeight = 16.sp,
+                                            )
+                                        },
+                                        selected = index == selectedIndex,
+                                        onClick = {
+                                            selectedIndex = index
+                                            navController.navigate(screen.route) {
+                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                    saveState = true
+                                                }
+                                                launchSingleTop = true
+                                                restoreState = true
                                             }
-                                            launchSingleTop = true
-                                            restoreState = true
-                                        }
-                                    },
-                                    colors = NavigationBarItemDefaults.colors(
-                                        selectedIconColor = MaterialTheme.colorScheme.secondary,
-                                        selectedTextColor = MaterialTheme.colorScheme.secondary,
-                                        unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                                        unselectedTextColor = MaterialTheme.colorScheme.tertiary,
-                                        indicatorColor = Color.Transparent,
-
+                                        },
+                                        colors = NavigationBarItemDefaults.colors(
+                                            selectedIconColor = MaterialTheme.colorScheme.secondary,
+                                            selectedTextColor = MaterialTheme.colorScheme.secondary,
+                                            unselectedIconColor = MaterialTheme.colorScheme.tertiary,
+                                            unselectedTextColor = MaterialTheme.colorScheme.tertiary,
+                                            indicatorColor = Color.Transparent,
                                         )
 
-                                )
+                                    )
+                                }
                             }
                         }
                     }) { innerPadding ->
