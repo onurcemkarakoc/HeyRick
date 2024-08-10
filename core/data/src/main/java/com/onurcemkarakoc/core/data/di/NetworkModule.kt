@@ -1,5 +1,6 @@
-package com.onurcemkarakoc.heyrick.di
+package com.onurcemkarakoc.core.data.di
 
+import com.onurcemkarakoc.core.data.KtorClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +13,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideKtorClient(): com.onurcemkarakoc.core.data.KtorClient {
-        return com.onurcemkarakoc.core.data.KtorClient()
+    fun provideKtorClient(): KtorClient {
+        return KtorClient()
     }
 }
