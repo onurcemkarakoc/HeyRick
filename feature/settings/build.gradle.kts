@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlinxSerialization)
     kotlin("kapt")
 }
 
@@ -42,7 +43,7 @@ android {
 dependencies {
 
     implementation(project(":core:common"))
-    implementation(project(":core:common"))
+    implementation(project(":core:data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -65,4 +66,6 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
+    implementation(libs.datastore)
+    implementation(libs.ktor.serialization)
 }
