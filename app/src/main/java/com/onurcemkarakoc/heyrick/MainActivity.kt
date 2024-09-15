@@ -1,8 +1,14 @@
 package com.onurcemkarakoc.heyrick
 
+import android.app.LocaleManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import android.os.LocaleList
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -13,15 +19,19 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.LocaleListCompat
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -31,27 +41,39 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.onurcemkarakoc.core.common.ui.theme.HeyRickTheme
 import com.onurcemkarakoc.core.common.utils.currentRoute
+import com.onurcemkarakoc.core.data.Language
+import com.onurcemkarakoc.core.data.Theme
 import com.onurcemkarakoc.feature.details.CharacterDetailsScreen
 import com.onurcemkarakoc.feature.episode.CharacterEpisodeScreen
 import com.onurcemkarakoc.feature.list.CharacterListScreen
 import com.onurcemkarakoc.feature.settings.SettingsScreen
+import com.onurcemkarakoc.feature.settings.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val items = listOf(Screen.CharacterList, Screen.Settings)
     private val nonShowedBottomBarScreens = listOf(Screen.CharacterDetails, Screen.CharacterEpisode)
+    private val settingsViewModel by viewModels<SettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
+            LaunchedEffect(key1 = Unit) {
+                settingsViewModel.getAllSettings()
+            }
+
             val navController: NavHostController = rememberNavController()
             var selectedIndex by remember {
                 mutableIntStateOf(0)
             }
-            HeyRickTheme {
+            val state = settingsViewModel.state.collectAsState()
+            val context = LocalContext.current
+            setLocale(context, state.value.language)
+
+            HeyRickTheme(darkTheme = state.value.theme == Theme.DARK) {
                 Scaffold(
                     bottomBar = {
                         val currentRoute = currentRoute(navController)
@@ -143,11 +165,23 @@ class MainActivity : ComponentActivity() {
                                 })
                         }
                         composable(route = Screen.Settings.route) {
-                            SettingsScreen()
+                            SettingsScreen(settingsViewModel)
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun setLocale(context: Context, language: Language) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            context.getSystemService(LocaleManager::class.java).applicationLocales =
+                LocaleList.forLanguageTags(language.localeCode)
+        } else {
+            AppCompatDelegate.setApplicationLocales(
+                LocaleListCompat.forLanguageTags(language.localeCode)
+            )
+        }
+
     }
 }

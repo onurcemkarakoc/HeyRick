@@ -19,28 +19,22 @@ class SettingsViewModel @Inject constructor(private val settingsRepository: Sett
     private val _state = MutableStateFlow(AppSettings())
     val state = _state.asStateFlow()
 
-    fun getTheme() = viewModelScope.launch {
+    fun getAllSettings() = viewModelScope.launch {
         val theme = settingsRepository.getTheme()
+        val language = settingsRepository.getLanguage()
         _state.update {
-            it.copy(theme = theme)
+            it.copy(theme = theme, language = language)
         }
     }
 
     fun setTheme(theme: Theme) = viewModelScope.launch {
         settingsRepository.setTheme(theme)
-        getTheme()
-    }
-
-    fun getLanguage() = viewModelScope.launch {
-        val language = settingsRepository.getLanguage()
-        _state.update {
-            it.copy(language = language)
-        }
+        getAllSettings()
     }
 
     fun setLanguage(language: Language) = viewModelScope.launch {
         settingsRepository.setLanguage(language)
-        getLanguage()
+        getAllSettings()
     }
 
 }

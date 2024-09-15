@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="character_image">Karakter image</string>
+    <string name="back_arrow">Geri Butonu</string>
+    <string name="app_name">HeyRick</string>
+    <string name="settings">Ayarlar</string>
+    <string name="character_list">Karakter Listesi</string>
+    <string name="character_details">Karakter Detayları</string>
+    <string name="character_episode">Karakter Bölümleri</string>
+    <string name="language">Dil</string>
+    <string name="theme">Tema</string>
+</resources>

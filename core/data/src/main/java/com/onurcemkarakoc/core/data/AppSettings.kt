@@ -12,6 +12,6 @@ enum class Theme {
     SYSTEM, LIGHT, DARK
 }
 
-enum class Language {
-    ENGLISH, TURKISH
+enum class Language(val localeCode: String) {
+    ENGLISH("en"), TURKISH("tr")
 }
